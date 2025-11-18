@@ -1,0 +1,19 @@
+from flask import Flask, jsonify
+import pandas as pd
+import os
+
+app = Flask(__name__)
+
+# If CSV doesn't exist, generate it
+if not os.path.exists("backend-api/sales_data.csv"):
+    from generate_sample_data import generate_csv
+    generate_csv()
+
+df = pd.read_csv("backend-api/sales_data.csv")
+
+@app.route('/sales')
+def get_sales():
+    return jsonify(df.to_dict(orient='records'))
+
+if __name__ == '__main__':
+    app.run()
