@@ -16,5 +16,3 @@ This project delivers a complete analytics system with automated data ingestion,
 
 ---
 
-## 📁 Folder Structure
-
