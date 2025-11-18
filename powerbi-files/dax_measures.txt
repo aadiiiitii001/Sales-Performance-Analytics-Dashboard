@@ -1,0 +1,55 @@
+-----------------------------
+📌 Core Sales Measures
+-----------------------------
+Total Revenue =
+SUM ( Sales_Fact[Revenue] )
+
+Total Quantity =
+SUM ( Sales_Fact[Quantity] )
+
+Average Order Value =
+DIVIDE ( [Total Revenue], DISTINCTCOUNT(Sales_Fact[SaleID]) )
+
+-----------------------------
+📌 Time Intelligence
+-----------------------------
+Revenue LY =
+CALCULATE ( [Total Revenue], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+
+YoY Growth % =
+VAR Current = [Total Revenue]
+VAR Previous = [Revenue LY]
+RETURN DIVIDE ( Current - Previous, Previous )
+
+Monthly Revenue Trend =
+CALCULATE ( [Total Revenue], DATESMTD ( 'Date'[Date] ) )
+
+-----------------------------
+📌 Product Performance
+-----------------------------
+Top Product Revenue =
+IF (
+    ISINSCOPE(Product_Dim[ProductName]),
+    [Total Revenue]
+)
+
+Revenue by Category =
+CALCULATE ( [Total Revenue], ALLEXCEPT(Product_Dim, Product_Dim[Category]) )
+
+-----------------------------
+📌 Customer Insights
+-----------------------------
+Revenue by Segment =
+CALCULATE ( [Total Revenue], ALLEXCEPT(Customer_Dim, Customer_Dim[Segment]) )
+
+Customer Count =
+DISTINCTCOUNT ( Customer_Dim[CustomerID] )
+
+-----------------------------
+📌 Profitability
+-----------------------------
+Gross Profit =
+SUMX ( Sales_Fact, Sales_Fact[Revenue] - (Sales_Fact[Quantity] * Sales_Fact[UnitPrice] * 0.70) )
+
+Profit Margin % =
+DIVIDE ( [Gross Profit], [Total Revenue] )
