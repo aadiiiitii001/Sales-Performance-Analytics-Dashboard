@@ -1,0 +1,12 @@
+Relationships (Single Direction):
+
+Product_Dim[ProductID] ----> Sales_Fact[ProductID]
+
+Customer_Dim[CustomerID] ----> Sales_Fact[CustomerID]
+
+Date_Dim[Date] ----> Sales_Fact[Date]
+
+Notes:
+• Cross-filter: Single direction (Dim → Fact)
+• Cardinality: One-to-Many
+• Star schema → Fact table in center
