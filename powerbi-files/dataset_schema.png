@@ -1,0 +1,25 @@
++-------------------+         +--------------------+
+|   Product_Dim     |         |   Customer_Dim     |
++-------------------+         +--------------------+
+| ProductID (PK)    |         | CustomerID (PK)    |
+| ProductName       |         | CustomerName       |
+| Category          |         | Segment            |
+| SubCategory       |         | State              |
++-------------------+         +--------------------+
+          \                        /
+           \                      /
+            \                    /
+             \                  /
+              \                /
+           +-------------------------------------------+
+           |                Sales_Fact                 |
+           +-------------------------------------------+
+           | SaleID (PK)                               |
+           | ProductID (FK)                            |
+           | CustomerID (FK)                           |
+           | Date                                      |
+           | Quantity                                  |
+           | UnitPrice                                 |
+           | Revenue                                   |
+           | Region                                    |
+           +-------------------------------------------+
